@@ -1,0 +1,20 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.2.0/peerjs.min.js"></script>
+<script>
+var peer = new Peer({
+	port: 6969,
+	host: 'localhost',
+	path: 'peerServer',
+});
+
+peer.on('open', function(id) {
+  console.log('My peer ID is: ' + id);
+});
+
+function onClickHandler()
+{
+	var conn = peer.connect('BaoKhanhThui696969');
+	conn.send('dit me mey');
+}
+</script>
+
+<button onClick="onClickHandler()">CLICK ME</button>
