@@ -1,0 +1,18 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.2.0/peerjs.min.js"></script>
+<script>
+var peer = new Peer('BaoKhanhThui696969', {
+	port: 6969,
+	host: 'localhost',
+	path: 'peerServer',
+});
+
+peer.on('connection', function(conn) {
+	console.log('connected');
+	conn.on('open', function () {
+		conn.on('data', function(data) {
+			console.log('data');
+		})
+	})
+})
+
+</script>
