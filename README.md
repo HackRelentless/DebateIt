@@ -5,8 +5,10 @@ There are no logins, no profiles, just choose your political alignment, choose a
 
 ### How to run
 
-in the root folder just run
+make sure you have `docker` and `docker-compose` installed on your system
+Simply run
 ```
-npm start
+docker-compose up -d --build
 ```
-The script will run `npm install` and `npm start` in both the backend and frontend folders simultaneously
+When checking `docker-compose ps`, your services should start up. 
+frontend is located on `localhost:4202`, backend is located on `localhost:4201`
