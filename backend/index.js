@@ -20,5 +20,5 @@ app.use(config.peer_server, peerServer);
 
 server.listen(config.port, () => {
 	console.log(`Listening to port: ${config.port}`);
-	console.log(`Peer server running on ${config.host}:${config.port}${config.peer_server}`)
+	console.log(`Peer server running on ${config.host}:${config.port}/${config.peer_server}`)
 });

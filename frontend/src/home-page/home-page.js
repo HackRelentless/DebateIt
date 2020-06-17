@@ -1,5 +1,6 @@
 import React from 'react';
 import Peer from 'peerjs';
+import config from '../local/config';
 
 class HomePage extends React.Component
 {
@@ -7,15 +8,16 @@ class HomePage extends React.Component
 	{
 		super(props);
 		this.peer = new Peer(null, {
-			host: 'localhost',
-			port: '6969',
-			path: '/peerServer'
+			host: config.peer_host,
+			port: config.peer_port,
+			path: config.peer_path
 		});
-		
 	}
 
 	componentDidMount()
 	{
+		console.log(this.props)
+
 		const _this = this;
 
 		this.setState({
@@ -23,15 +25,27 @@ class HomePage extends React.Component
 		});
 
 		this.peer.on('open', (id) => {
-			this.setState({
+			_this.setState({
 				this_peer_id: id,
 			})
 		});
 
 		this.peer.on('connection', function (conn) {
 			_this.setState({
+				connected: true,
 				connected_id: conn.peer,
 			});
+		});
+
+		this.peer.on('disconnected', function (conn) {
+			_this.setState({
+				connected: false,
+				connected_id: "",
+			});
+		});
+
+		this.peer.on('error', function(err){
+			alert("Counld not connect to peer");
 		});
 	}
 
@@ -52,7 +66,6 @@ class HomePage extends React.Component
 		this.setState({
 			input_val: e.target.value,
 		});
-		console.log(this.state);
 	}
 
 	render()
@@ -61,7 +74,7 @@ class HomePage extends React.Component
 			<div>
 				<h2>Your id is: {this.state.this_peer_id}</h2>
 				<input id="id-connect-input" placeholder="Enter ID to connect here" value={this.state.input_val} onChange={this.handleInputChange}></input>
-				<button onClick={this.connectToPeer}>CLICK ME</button>
+				<button onClick={this.props.test}>CLICK ME</button>
 				<br></br>
 				<p>Connected to: {this.state.connected_id}</p>
 			</div>
